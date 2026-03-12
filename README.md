@@ -1,2 +1,0 @@
-# Index.html
-# Gitf.html
