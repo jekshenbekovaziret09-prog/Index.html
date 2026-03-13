@@ -1,191 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TERMINAL://Жекшенбеков.Азирет.6A </title>
+    <title>TERMINAL://Жекшенбеков.Азирет.6А</title>
     <style>
-    /* ... дальше ваш CSS код ...     
-<!DOCTYPE html>
-      /* Основные настройки для "хакерского" стиля */
         body {
-            /* Чёрный фон */
-            background-color: #000000;
-            /* Ярко-зелёный текст */
+            background-color: #000;
             color: #00ff00;
-            /* Шрифт, как в терминале (моноширинный) */
             font-family: 'Courier New', Courier, monospace;
-            margin: 20px;
-            /* Добавляем лёгкое свечение тексту */
-            text-shadow: 0 0 5px #00ff00;
+            margin: 0;
+            padding: 20px;
+            overflow-x: hidden;
         }
 
-        /* Настройка блоков (шапки и секций) */
+        #matrix {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
         header, section {
-            /* Прозрачный фон с зелёной рамкой */
-            background: rgba(0, 20, 0, 0.5);
+            background: rgba(0, 15, 0, 0.85);
             border: 1px solid #00ff00;
             padding: 20px;
             margin-bottom: 20px;
             border-radius: 5px;
-            /* Внутреннее свечение блоков */
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
-        }
-
-        /* Заголовки делаем ещё ярче */
-        h1, h2, h3 {
-            color: #33ff33;
-            text-transform: uppercase; /* Все буквы заглавные */
-            letter-spacing: 2px; /* Расстояние между буквами */
-        }
-
-        h1 {
-            font-size: 1.5em;
-            border-bottom: 2px solid #00ff00;
-            padding-bottom: 10px;
-        }
-
-        /* Список предметов */
-        ul {
-            list-style-type: "> "; /* Вместо точек используем стрелочки */
-            padding-left: 20px;
-        }
-
-        li {
-            margin-bottom: 10px;
-        }
-
-        /* Спецэффект: мигающий курсор в конце заголовка */
-        .cursor {
-            display: inline-block;
-            width: 10px;
-            background-color: #00ff00;
-            animation: blink 1s infinite;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-
-    </style>
-</head>
-<body>
-
-    <header>
-        <h1>SYSTEM_OVERRIDE:
-            //INFO_HOMEWORK<span class="cursor">&nbsp;</span></h1>
-        <p>USER_ID: Жекшенбеков Азирет</p>
-        <p>ACCESS_LEVEL: Ученик 6 «А» класса</p>
-    </header>
-
-    <section>
-        <h2>> DECRYPTING_METHOD: HTML</h2>
-        <p>STATUS: Знание языка гипертекстовой разметки подтверждено.</p>
-        <p>OBJECTIVE: Создание структуры веб-пространства.</p>
-        
-        <h3>> PRIORITY_SUBJECTS:</h3>
-        <ul>
-            <li>Информатика</li>
-            <li>Математика</li>
-            <li>Физкультура</li>
-        </ul>
-        <h3>> VIDEO_LOG:</h3>
-
-<iframe 
-width="100%" 
-height="250"
-src="https://www.youtube.com/embed/Ke-O69bwqY8"
-title="YouTube video"
-frameborder="0"
-allowfullscreen>
-</iframe>
-    </section>
-
-    <section>
-        <h2>> SYSTEM_LOG://END_
-            OF_FILE</h2>
-        <p>Программа выполнена успешно. Ожидание команды...</p>
-    </section>
-<canvas id="matrix"></canvas>
-
-<style>
-#matrix{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-z-index:-1;
-}
-</style>
-
-<script>
-const canvas = document.getElementById("matrix");
-const ctx = canvas.getContext("2d");
-
-canvas.height = window.innerHeight;
-canvas.width = window.innerWidth;
-
-const letters = "1010110101101010101011010101";
-const matrix = letters.split("");
-
-const fontSize = 16;
-const columns = canvas.width / fontSize;
-
-const drops = [];
-for(let x = 0; x < columns; x++)
-drops[x] = 1;
-
-function draw(){
-
-ctx.fillStyle = "rgba(0,0,0,0.05)";
-ctx.fillRect(0,0,canvas.width,canvas.height);
-
-ctx.fillStyle = "#00ff00"; 
-ctx.font = fontSize + "px monospace";
-
-for(let i = 0; i < drops.length; i++){
-
-const text = matrix[Math.floor(Math.random()*matrix.length)];
-
-ctx.fillText(text,i*fontSize,drops[i]*fontSize);
-
-if(drops[i]*fontSize > canvas.height && Math.random() > 0.975)
-drops[i] = 0;
-
-drops[i]++;
-}
-
-}
-
-setInterval(draw,33);
-</script>
-    
-    <title>TERMINAL://Жекшенбеков.Азирет.5А</title>
-    <style>
-        /* 1. ТВОЙ СТИЛЬ (CSS) */
-        body {
-            background-color: #000000;
-            color: #00ff00;
-            font-family: 'Courier New', Courier, monospace;
-            margin: 20px;
-            text-shadow: 0 0 5px #00ff00;
-        }
-
-        header, section {
-            background: rgba(0, 20, 0, 0.5);
-            border: 1px solid #00ff00;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
         }
 
         h1, h2 {
             color: #33ff33;
             text-transform: uppercase;
+            border-bottom: 1px solid #00ff00;
+            padding-bottom: 10px;
         }
 
-        /* Стиль для кнопки из твоего скрипта */
         button {
             background: #000;
             color: #00ff00;
@@ -193,12 +43,17 @@ setInterval(draw,33);
             padding: 10px 20px;
             font-family: 'Courier New', monospace;
             cursor: pointer;
-            margin-top: 10px;
+            text-transform: uppercase;
         }
 
         button:hover {
             background: #00ff00;
             color: #000;
+        }
+
+        .video-container {
+            border: 2px solid #00ff00;
+            margin-top: 15px;
         }
 
         .cursor {
@@ -216,23 +71,24 @@ setInterval(draw,33);
 </head>
 <body>
 
+    <canvas id="matrix"></canvas>
+
     <header>
-        <h1>SYSTEM_OVERRIDE://INFO_HOMEWORK<span class="cursor">&nbsp;</span></h1>
-        <p>USER_ID: Жекшенбеков Азирет</p>
-        <p>ACCESS_LEVEL: Ученик 5 «А» класса</p>
-        <p>SYSTEM_TIME: <span id="clock"></span></p>
+        <h1>SYSTEM_OVERRIDE://INFO<span class="cursor">&nbsp;</span></h1>
+        <p>USER: Жекшенбеков Азирет</p>
+        <p>CLASS: 6 «А»</p>
+        <p>TIME: <span id="clock">00:00:00</span></p>
     </header>
 
     <section>
         <h2>> STATUS_LOG</h2>
         <p id="typing" style="height: 20px; font-weight: bold;"></p>
-        
         <button onclick="runCommand()">RUN COMMAND</button>
-        <p id="commandResult" style="margin-top: 10px;"></p>
+        <p id="commandResult" style="margin-top: 15px;"></p>
     </section>
 
     <section>
-        <h2>> PRIORITY_SUBJECTS:</h2>
+        <h2>> PRIORITY_SUBJECTS</h2>
         <ul>
             <li>Информатика</li>
             <li>Математика</li>
@@ -240,37 +96,77 @@ setInterval(draw,33);
         </ul>
     </section>
 
-    <script>
-        // --- ПЕЧАТАЮЩИЙСЯ ТЕКСТ ---
-        const text = "ACCESSING SYSTEM... WELCOME USER AZIRET...";
-        let i = 0;
+    <section>
+        <h2>> EXTERNAL_SOURCE</h2>
+        <div class="video-container">
+            <iframe 
+                width="100%" 
+                height="315" 
+                src="https://www.youtube.com/embed/Ke-O69bwqY8" 
+                frameborder="0" 
+                allowfullscreen>
+            </iframe>
+        </div>
+    </section>
 
-        function typeText(){
-            if(i < text.length){
-                document.getElementById("typing").innerHTML += text.charAt(i);
-                i++;
-                setTimeout(typeText, 50);
+    <script>
+        // МАТРИЦА
+        const canvas = document.getElementById("matrix");
+        const ctx = canvas.getContext("2d");
+        canvas.height = window.innerHeight;
+        canvas.width = window.innerWidth;
+        const letters = "101010110101".split("");
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+        const drops = [];
+        for (let x = 0; x < columns; x++) drops[x] = 1;
+
+        function drawMatrix() {
+            ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "#00ff00";
+            ctx.font = fontSize + "px monospace";
+            for (let i = 0; i < drops.length; i++) {
+                const text = letters[Math.floor(Math.random() * letters.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                drops[i]++;
             }
         }
-        // Запускаем печать сразу при открытии
-        window.onload = typeText;
+        setInterval(drawMatrix, 33);
 
-        // --- ВРЕМЯ СИСТЕМЫ ---
-        function updateClock(){
-            const now = new Date();
-            const time = now.toLocaleTimeString();
-            document.getElementById("clock").textContent = time;
+        // ПЕЧАТЬ
+        const message = "INITIALIZING... ACCESS GRANTED. WELCOME, AZIRET.";
+        let charIndex = 0;
+        function type() {
+            if (charIndex < message.length) {
+                document.getElementById("typing").innerHTML += message.charAt(charIndex);
+                charIndex++;
+                setTimeout(type, 60);
+            }
+        }
+        window.onload = type;
+
+        // ЧАСЫ
+        function updateClock() {
+            document.getElementById("clock").textContent = new Date().toLocaleTimeString();
         }
         setInterval(updateClock, 1000);
         updateClock();
 
-        // --- КОМАНДА КНОПКИ ---
-        function runCommand(){
-            document.getElementById("commandResult").innerHTML = ">>> ACCESS GRANTED";
-            document.getElementById("commandResult").style.color = "#33ff33";
+        // КОМАНДА
+        function runCommand() {
+            const res = document.getElementById("commandResult");
+            res.innerHTML = ">>> [SYSTEM]: ВСЕ ЗАДАНИЯ ВЫПОЛНЕНЫ НА 5+";
+            res.style.color = "#33ff33";
         }
-    </script>
-    
-</body>
-</html>
 
+        window.onresize = () => {
+            canvas.height = window.innerHeight;
+            canvas.width = window.innerWidth;
+        };
+    </script>
+
+</body>
+        </html>
+        
