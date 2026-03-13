@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>TERMINAL://Жекшенбеков.Азирет.6А</title>
+    <title>TERMINAL://JEKSHENBEKOV.AZIRET.6A</title>
     <style>
         body {
             background-color: #000;
@@ -21,12 +21,13 @@
         }
 
         header, section {
-            background: rgba(0, 15, 0, 0.85);
-            border: 1px solid #00ff00;
+            background: rgba(0, 10, 0, 0.9);
+            border: 2px solid #00ff00;
             padding: 20px;
-            margin-bottom: 20px;
+            margin: 0 auto 20px auto;
+            max-width: 900px; /* Чтобы на компьютере не было слишком широко */
             border-radius: 5px;
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
         }
 
         h1, h2 {
@@ -34,37 +35,49 @@
             text-transform: uppercase;
             border-bottom: 1px solid #00ff00;
             padding-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        /* Список предметов */
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul li::before {
+            content: "> ";
+            color: #00ff00;
         }
 
         button {
             background: #000;
             color: #00ff00;
             border: 1px solid #00ff00;
-            padding: 10px 20px;
+            padding: 10px 25px;
             font-family: 'Courier New', monospace;
             cursor: pointer;
             text-transform: uppercase;
+            transition: 0.3s;
         }
 
         button:hover {
             background: #00ff00;
             color: #000;
+            box-shadow: 0 0 15px #00ff00;
         }
 
         .video-container {
-            border: 2px solid #00ff00;
+            border: 1px solid #00ff00;
             margin-top: 15px;
+            background: #000;
         }
 
-        .cursor {
-            display: inline-block;
-            width: 10px;
-            background-color: #00ff00;
-            animation: blink 1s infinite;
+        /* Мигающий курсор */
+        .blink {
+            animation: blinker 1s linear infinite;
         }
 
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
+        @keyframes blinker {
             50% { opacity: 0; }
         }
     </style>
@@ -74,34 +87,34 @@
     <canvas id="matrix"></canvas>
 
     <header>
-        <h1>SYSTEM_OVERRIDE://INFO<span class="cursor">&nbsp;</span></h1>
-        <p>USER: Жекшенбеков Азирет</p>
-        <p>CLASS: 6 «А»</p>
-        <p>TIME: <span id="clock">00:00:00</span></p>
+        <h1>SYSTEM OVERRIDE: INFORMATION<span class="blink">_</span></h1>
+        <p>USER_ID: Жекшенбеков Азирет</p>
+        <p>SECTOR: 6 «А» класс</p>
+        <p>LOCAL_TIME: <span id="clock">00:00:00</span></p>
     </header>
 
     <section>
-        <h2>> STATUS_LOG</h2>
+        <h2>> STATUS LOG</h2>
         <p id="typing" style="height: 20px; font-weight: bold;"></p>
-        <button onclick="runCommand()">RUN COMMAND</button>
-        <p id="commandResult" style="margin-top: 15px;"></p>
+        <button onclick="runCommand()">EXECUTE COMMAND</button>
+        <p id="commandResult" style="margin-top: 15px; color: #33ff33;"></p>
     </section>
 
     <section>
-        <h2>> PRIORITY_SUBJECTS</h2>
+        <h2>> PRIORITY SUBJECTS LIST</h2>
         <ul>
-            <li>Информатика</li>
-            <li>Математика</li>
-            <li>Физкультура</li>
+            <li>Информатика (Core)</li>
+            <li>Математика (Logic)</li>
+            <li>Физкультура (Physical)</li>
         </ul>
     </section>
 
     <section>
-        <h2>> EXTERNAL_SOURCE</h2>
+        <h2>> EXTERNAL DATA SOURCE</h2>
         <div class="video-container">
             <iframe 
                 width="100%" 
-                height="315" 
+                height="450" 
                 src="https://www.youtube.com/embed/Ke-O69bwqY8" 
                 frameborder="0" 
                 allowfullscreen>
@@ -110,12 +123,12 @@
     </section>
 
     <script>
-        // МАТРИЦА
+        // --- MATRIX BACKGROUND ---
         const canvas = document.getElementById("matrix");
         const ctx = canvas.getContext("2d");
         canvas.height = window.innerHeight;
         canvas.width = window.innerWidth;
-        const letters = "101010110101".split("");
+        const letters = "01".split("");
         const fontSize = 16;
         const columns = canvas.width / fontSize;
         const drops = [];
@@ -133,32 +146,30 @@
                 drops[i]++;
             }
         }
-        setInterval(drawMatrix, 33);
+        setInterval(drawMatrix, 35);
 
-        // ПЕЧАТЬ
-        const message = "INITIALIZING... ACCESS GRANTED. WELCOME, AZIRET.";
-        let charIndex = 0;
+        // --- TYPING EFFECT ---
+        const msg = "CONNECTING TO SERVER... ACCESS GRANTED. WELCOME, OPERATOR AZIRET.";
+        let index = 0;
         function type() {
-            if (charIndex < message.length) {
-                document.getElementById("typing").innerHTML += message.charAt(charIndex);
-                charIndex++;
-                setTimeout(type, 60);
+            if (index < msg.length) {
+                document.getElementById("typing").innerHTML += msg.charAt(index);
+                index++;
+                setTimeout(type, 50);
             }
         }
         window.onload = type;
 
-        // ЧАСЫ
+        // --- CLOCK ---
         function updateClock() {
             document.getElementById("clock").textContent = new Date().toLocaleTimeString();
         }
         setInterval(updateClock, 1000);
         updateClock();
 
-        // КОМАНДА
+        // --- COMMAND ---
         function runCommand() {
-            const res = document.getElementById("commandResult");
-            res.innerHTML = ">>> [SYSTEM]: ВСЕ ЗАДАНИЯ ВЫПОЛНЕНЫ НА 5+";
-            res.style.color = "#33ff33";
+            document.getElementById("commandResult").innerHTML = ">>> [SYSTEM]: ALL SYSTEMS NOMINAL. GRADE A+ SECURED.";
         }
 
         window.onresize = () => {
@@ -168,5 +179,4 @@
     </script>
 
 </body>
-        </html>
-        
+</html>
