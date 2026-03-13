@@ -159,6 +159,118 @@ drops[i]++;
 
 setInterval(draw,33);
 </script>
+    
+    <title>TERMINAL://Жекшенбеков.Азирет.5А</title>
+    <style>
+        /* 1. ТВОЙ СТИЛЬ (CSS) */
+        body {
+            background-color: #000000;
+            color: #00ff00;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 20px;
+            text-shadow: 0 0 5px #00ff00;
+        }
+
+        header, section {
+            background: rgba(0, 20, 0, 0.5);
+            border: 1px solid #00ff00;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+        }
+
+        h1, h2 {
+            color: #33ff33;
+            text-transform: uppercase;
+        }
+
+        /* Стиль для кнопки из твоего скрипта */
+        button {
+            background: #000;
+            color: #00ff00;
+            border: 1px solid #00ff00;
+            padding: 10px 20px;
+            font-family: 'Courier New', monospace;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #00ff00;
+            color: #000;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            background-color: #00ff00;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>SYSTEM_OVERRIDE://INFO_HOMEWORK<span class="cursor">&nbsp;</span></h1>
+        <p>USER_ID: Жекшенбеков Азирет</p>
+        <p>ACCESS_LEVEL: Ученик 5 «А» класса</p>
+        <p>SYSTEM_TIME: <span id="clock"></span></p>
+    </header>
+
+    <section>
+        <h2>> STATUS_LOG</h2>
+        <p id="typing" style="height: 20px; font-weight: bold;"></p>
+        
+        <button onclick="runCommand()">RUN COMMAND</button>
+        <p id="commandResult" style="margin-top: 10px;"></p>
+    </section>
+
+    <section>
+        <h2>> PRIORITY_SUBJECTS:</h2>
+        <ul>
+            <li>Информатика</li>
+            <li>Математика</li>
+            <li>Физкультура</li>
+        </ul>
+    </section>
+
+    <script>
+        // --- ПЕЧАТАЮЩИЙСЯ ТЕКСТ ---
+        const text = "ACCESSING SYSTEM... WELCOME USER AZIRET...";
+        let i = 0;
+
+        function typeText(){
+            if(i < text.length){
+                document.getElementById("typing").innerHTML += text.charAt(i);
+                i++;
+                setTimeout(typeText, 50);
+            }
+        }
+        // Запускаем печать сразу при открытии
+        window.onload = typeText;
+
+        // --- ВРЕМЯ СИСТЕМЫ ---
+        function updateClock(){
+            const now = new Date();
+            const time = now.toLocaleTimeString();
+            document.getElementById("clock").textContent = time;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // --- КОМАНДА КНОПКИ ---
+        function runCommand(){
+            document.getElementById("commandResult").innerHTML = ">>> ACCESS GRANTED";
+            document.getElementById("commandResult").style.color = "#33ff33";
+        }
+    </script>
+    
 </body>
 </html>
 
