@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TERMINAL://JEKSHENBEKOV.AZIRET.6A</title>
     <style>
+        /* Основной стиль терминала */
         body {
             background-color: #000;
             color: #00ff00;
@@ -14,6 +15,7 @@
             overflow-x: hidden;
         }
 
+        /* Анимированный фон Матрица */
         #matrix {
             position: fixed;
             top: 0;
@@ -21,6 +23,7 @@
             z-index: -1;
         }
 
+        /* Стили блоков */
         header, section {
             background: rgba(0, 15, 0, 0.9);
             border: 1px solid #00ff00;
@@ -42,9 +45,11 @@
             word-wrap: break-word;
         }
 
+        /* Список предметов с полосками прогресса */
         .subject-list li {
             margin: 10px 0;
             color: #afff00;
+            list-style: none;
         }
 
         .progress-bar {
@@ -68,12 +73,18 @@
             cursor: pointer;
             width: 100%;
             font-size: 1em;
+            text-transform: uppercase;
         }
 
-        /* Контейнер для YouTube видео */
+        button:active {
+            background: #00ff00;
+            color: #000;
+        }
+
+        /* Адаптивный контейнер для YouTube */
         .video-container {
             position: relative;
-            padding-bottom: 56.25%; /* Соотношение сторон 16:9 */
+            padding-bottom: 56.25%; 
             height: 0;
             overflow: hidden;
             border: 1px solid #00ff00;
@@ -112,14 +123,14 @@
 
     <section>
         <h2>> STATUS LOG</h2>
-        <p id="typing" style="min-height: 40px;"></p>
+        <p id="typing" style="min-height: 40px; color: #fff;"></p>
         <button onclick="runCommand()">EXECUTE COMMAND</button>
-        <div id="commandResult" style="margin-top: 10px;"></div>
+        <div id="commandResult" style="margin-top: 10px; font-weight: bold;"></div>
     </section>
 
     <section>
         <h2>> PRIORITY SUBJECTS</h2>
-        <ul class="subject-list" style="list-style: none; padding: 0;">
+        <ul class="subject-list" style="padding: 0;">
             <li>> Информатика <div class="progress-bar"><div class="progress-fill" style="width: 98%;"></div></div></li>
             <li>> Математика <div class="progress-bar"><div class="progress-fill" style="width: 85%;"></div></div></li>
             <li>> Физкультура <div class="progress-bar"><div class="progress-fill" style="width: 100%;"></div></div></li>
@@ -139,6 +150,7 @@
     </section>
 
     <script>
+        // Скрипт фона Матрицы
         const c = document.getElementById("matrix");
         const x = c.getContext("2d");
         const resize = () => { 
@@ -164,6 +176,7 @@
         }
         setInterval(drawMatrix, 35);
 
+        // Эффект печатающегося текста
         const msg = "MOBILE ACCESS GRANTED. HELLO, AZIRET.";
         let j = 0;
         function type() {
@@ -174,12 +187,18 @@
         }
         window.onload = type;
 
+        // Часы
         setInterval(() => {
             document.getElementById("clock").innerText = new Date().toLocaleTimeString();
         }, 1000);
 
+        // Функция кнопки
         function runCommand() {
-            document.getElementById("commandResult").innerHTML = ">>> SYSTEM: YOUTUBE STREAM LOADED";
+            const res = document.getElementById("commandResult");
+            res.innerHTML = ">>> СКАНИРОВАНИЕ...";
+            setTimeout(() => {
+                res.innerHTML = ">>> SYSTEM: ALL DATA SECURED";
+            }, 1000);
         }
     </script>
 </body>
