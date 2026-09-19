@@ -1,205 +1,136 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TERMINAL://JEKSHENBEKOV.AZIRET.6A</title>
-    <style>
-        /* Основной стиль терминала */
-        body {
-            background-color: #000;
-            color: #00ff00;
-            font-family: 'Courier New', Courier, monospace;
-            margin: 0;
-            padding: 10px;
-            overflow-x: hidden;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Разноцветное сердце</title>
 
-        /* Анимированный фон Матрица */
-        #matrix {
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: -1;
-        }
+<style>
+html, body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: black;
+}
 
-        /* Стили блоков */
-        header, section {
-            background: rgba(0, 15, 0, 0.9);
-            border: 1px solid #00ff00;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
-            width: auto; 
-            max-width: 100%;
-            box-sizing: border-box;
-        }
-
-        h1, h2 {
-            color: #33ff33;
-            text-transform: uppercase;
-            border-bottom: 1px solid #00ff00;
-            padding-bottom: 5px;
-            font-size: 1.1em;
-            word-wrap: break-word;
-        }
-
-        /* Список предметов с полосками прогресса */
-        .subject-list li {
-            margin: 10px 0;
-            color: #afff00;
-            list-style: none;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 4px;
-            background: #002200;
-            margin-top: 5px;
-        }
-        .progress-fill {
-            height: 100%;
-            background: #00ff00;
-            box-shadow: 0 0 10px #00ff00;
-        }
-
-        button {
-            background: #000;
-            color: #00ff00;
-            border: 1px solid #00ff00;
-            padding: 12px;
-            font-family: 'Courier New', monospace;
-            cursor: pointer;
-            width: 100%;
-            font-size: 1em;
-            text-transform: uppercase;
-        }
-
-        button:active {
-            background: #00ff00;
-            color: #000;
-        }
-
-        /* Адаптивный контейнер для YouTube */
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%; 
-            height: 0;
-            overflow: hidden;
-            border: 1px solid #00ff00;
-            background: #000;
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.4);
-        }
-
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        .blink { animation: b 1s infinite; }
-        @keyframes b { 50% { opacity: 0; } }
-        
-        p, li {
-            font-size: 0.9em;
-            line-height: 1.4;
-        }
-    </style>
+canvas {
+    display: block;
+}
+</style>
 </head>
+
 <body>
 
-    <canvas id="matrix"></canvas>
+<canvas id="heart"></canvas>
 
-    <header>
-        <h1>SYSTEM OVERRIDE: INFO<span class="blink">_</span></h1>
-        <p>USER: Жекшенбеков Азирет</p>
-        <p>SECTOR: 6 «А» класс</p>
-        <p>TIME: <span id="clock">00:00:00</span></p>
-    </header>
+<script>
+const canvas = document.getElementById("heart");
+const ctx = canvas.getContext("2d");
 
-    <section>
-        <h2>> STATUS LOG</h2>
-        <p id="typing" style="min-height: 40px; color: #fff;"></p>
-        <button onclick="runCommand()">EXECUTE COMMAND</button>
-        <div id="commandResult" style="margin-top: 10px; font-weight: bold;"></div>
-    </section>
+let w, h;
+let cx, cy;
+let scale;
 
-    <section>
-        <h2>> PRIORITY SUBJECTS</h2>
-        <ul class="subject-list" style="padding: 0;">
-            <li>> Информатика <div class="progress-bar"><div class="progress-fill" style="width: 98%;"></div></div></li>
-            <li>> Математика <div class="progress-bar"><div class="progress-fill" style="width: 85%;"></div></div></li>
-            <li>> Физкультура <div class="progress-bar"><div class="progress-fill" style="width: 100%;"></div></div></li>
-        </ul>
-    </section>
+const colors = [
+    "red",
+    "blue",
+    "lime",
+    "yellow",
+    "cyan",
+    "magenta",
+    "orange",
+    "pink"
+];
 
-    <section>
-        <h2>> DATA STREAM (YOUTUBE)</h2>
-        <div class="video-container">
-            <iframe 
-                src="https://www.youtube.com/embed/Ke-O69bwqY8" 
-                title="YouTube video player" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                allowfullscreen>
-            </iframe>
-        </div>
-    </section>
+function resize() {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
 
-    <script>
-        // Скрипт фона Матрицы
-        const c = document.getElementById("matrix");
-        const x = c.getContext("2d");
-        const resize = () => { 
-            c.width = window.innerWidth; 
-            c.height = window.innerHeight; 
-        };
-        window.onresize = resize; 
-        resize();
+    cx = w / 2;
+    cy = h / 2;
 
-        const s = 14, columns = Math.ceil(c.width/s), drops = Array(columns).fill(1);
-        
-        function drawMatrix() {
-            x.fillStyle = "rgba(0,0,0,0.05)"; 
-            x.fillRect(0,0,c.width,c.height);
-            x.fillStyle = "#0f0"; 
-            x.font = s+"px monospace";
-            drops.forEach((y,i) => {
-                const txt = Math.floor(Math.random()*2);
-                x.fillText(txt, i*s, y*s);
-                if(y*s > c.height && Math.random() > 0.975) drops[i]=0; 
-                drops[i]++;
-            });
-        }
-        setInterval(drawMatrix, 35);
+    scale = Math.min(w, h) / 32;
 
-        // Эффект печатающегося текста
-        const msg = "MOBILE ACCESS GRANTED. HELLO, AZIRET.";
-        let j = 0;
-        function type() {
-            if(j < msg.length) {
-                document.getElementById("typing").innerHTML += msg[j++];
-                setTimeout(type, 50);
-            }
-        }
-        window.onload = type;
+    ctx.fillStyle = "black";
+    ctx.fillRect(0, 0, w, h);
+}
 
-        // Часы
-        setInterval(() => {
-            document.getElementById("clock").innerText = new Date().toLocaleTimeString();
-        }, 1000);
+window.addEventListener("resize", resize);
+resize();
 
-        // Функция кнопки
-        function runCommand() {
-            const res = document.getElementById("commandResult");
-            res.innerHTML = ">>> СКАНИРОВАНИЕ...";
-            setTimeout(() => {
-                res.innerHTML = ">>> SYSTEM: ALL DATA SECURED";
-            }, 1000);
-        }
-    </script>
+let i = 0;
+
+function heartPoint(angle) {
+    const x = 16 * Math.pow(Math.sin(angle), 3);
+
+    const y =
+        13 * Math.cos(angle)
+        - 5 * Math.cos(2 * angle)
+        - 2 * Math.cos(3 * angle)
+        - Math.cos(4 * angle);
+
+    return {
+        x: cx + x * scale,
+        y: cy - y * scale
+    };
+}
+
+function drawStar(x, y, color) {
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 1;
+
+    for (let j = 0; j < 8; j++) {
+        const angle = j * Math.PI / 4;
+
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+
+        ctx.lineTo(
+            x + Math.cos(angle) * 6,
+            y + Math.sin(angle) * 6
+        );
+
+        ctx.stroke();
+    }
+}
+
+function animate() {
+
+    const angle = i * Math.PI * 2 / 120;
+    const p = heartPoint(angle);
+
+    const color =
+        colors[Math.floor(Math.random() * colors.length)];
+
+    // Луч остаётся на экране
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 1;
+
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(p.x, p.y);
+    ctx.stroke();
+
+    // Вспышка остаётся
+    drawStar(p.x, p.y, color);
+
+    i++;
+
+    // Когда сердце закончено — начинаем снова,
+    // но старые цвета НЕ стираются
+    if (i >= 120) {
+        i = 0;
+    }
+
+    setTimeout(() => {
+        requestAnimationFrame(animate);
+    }, 20);
+}
+
+animate();
+</script>
+
 </body>
 </html>
+        
